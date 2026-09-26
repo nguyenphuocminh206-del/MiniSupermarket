@@ -124,3 +124,4 @@ D:\MiniSupermarket-Session1\MiniSupermarket.API\bin\Debug\net8.0\Microsoft.Ident
 D:\MiniSupermarket-Session1\MiniSupermarket.API\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 D:\MiniSupermarket-Session1\MiniSupermarket.API\bin\Debug\net8.0\System.Formats.Asn1.dll
 D:\MiniSupermarket-Session1\MiniSupermarket.API\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+D:\MiniSupermarket-Session1\MiniSupermarket.API\obj\Debug\net8.0\MiniSupermarket.API.sourcelink.json

@@ -9,8 +9,7 @@
       },
       {
         "Path": "MiniSupermarket.WinForms\\MiniSupermarket.WinForms.csproj",
-        "Action": "Start",
-        "DebugTarget": "MiniSupermarket.WinForms"
+        "Action": "Start"
       }
     ]
   }

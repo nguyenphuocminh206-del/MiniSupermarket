@@ -70,3 +70,4 @@ D:\MiniSupermarket-Session2\MiniSupermarket.WinForms\obj\Debug\net8.0-windows\Mi
 D:\MiniSupermarket-Session2\MiniSupermarket.WinForms\obj\Debug\net8.0-windows\ref\MiniSupermarket.WinForms.dll
 D:\MiniSupermarket-Session2\MiniSupermarket.WinForms\obj\Debug\net8.0-windows\MiniSupermarket.WinForms.FormLogin.resources
 D:\MiniSupermarket-Session1\MiniSupermarket.WinForms\obj\Debug\net8.0-windows\MiniSupermarket.WinForms.FormLogin.resources
+D:\MiniSupermarket-Session1\MiniSupermarket.WinForms\obj\Debug\net8.0-windows\MiniSupermarket.WinForms.sourcelink.json
