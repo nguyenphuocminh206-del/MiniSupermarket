@@ -1,6 +1,6 @@
-# MiniSuperMarket — Buổi 3
+# MiniSuperMarket — Buổi 4
 
-**SQL Server, EF Core và khách hàng**
+**Giao diện quản trị và quản lý hàng hóa**
 
 Đây là một trong 5 mốc học tập được tách lại từ project hiện có. Lịch sử các nhánh là lộ trình học được dựng lại, không phải lịch sử thực hiện bài tập ban đầu.
 
@@ -14,19 +14,19 @@
 | `buoi4` | Shell quản trị, sản phẩm/phân trang, thương hiệu, tài khoản, vai trò | Kế thừa buoi3 |
 | `buoi5` | POS, thanh toán, đơn hàng, hoàn kho, dashboard, báo cáo, xuất hóa đơn | Project đầy đủ |
 
-## Nội dung buổi 3
+## Nội dung buổi 4
 
-- Chuyển dữ liệu sang SQL Server LocalDB bằng Entity Framework Core.
-- Học DbContext, model, quan hệ, migration, dữ liệu mẫu và truy vấn async.
-- Đăng nhập với tài khoản trong cơ sở dữ liệu; bổ sung CRUD/tìm kiếm khách hàng.
-- Giữ trọn mô hình dữ liệu và lịch sử migration của project để các buổi sau dùng chung một schema; API của buổi này gồm auth, categories, customers.
+- Bổ sung shell với menu theo vai trò và nhúng các form quản lý.
+- Quản lý sản phẩm, thương hiệu, tài khoản và vai trò bằng API và WinForms.
+- Thực hành DTO, AsNoTracking, Eager Loading, tìm kiếm và phân trang phía server.
+- Admin có toàn bộ chức năng quản trị; Warehouse xem nhóm hàng và quản lý hàng hóa; Cashier chỉ xem nhóm hàng trong mốc này.
 
 ## Chạy project
 
 Yêu cầu Windows, .NET 8 SDK hoặc SDK mới hơn hỗ trợ net8.0; cài .NET 8 Desktop Runtime để chạy WinForms. Có thể mở `MiniSuperMarket.sln` bằng Visual Studio hỗ trợ .NET 8.
 
 ```powershell
-git clone --branch buoi3 https://github.com/nguyenphuocminh206-del/MiniSupermarket.git
+git clone --branch buoi4 https://github.com/nguyenphuocminh206-del/MiniSupermarket.git
 cd MiniSupermarket
 dotnet restore MiniSuperMarket.sln
 dotnet build MiniSuperMarket.sln --configuration Release
@@ -64,15 +64,15 @@ Các tài khoản và khóa JWT có sẵn chỉ phục vụ học tập trên m�
 
 ## Tự kiểm tra
 
-- [ ] dotnet ef database update chạy hết migration và tạo dữ liệu mẫu.
-- [ ] Đăng nhập admin01/123456, thêm/sửa/xóa một khách hàng thử nghiệm.
-- [ ] Khởi động lại API và kiểm tra dữ liệu đã lưu vẫn còn trong SQL Server.
+- [ ] Đăng nhập admin01/123456, mở các màn hình sản phẩm/thương hiệu/tài khoản/vai trò.
+- [ ] Tìm sản phẩm, chuyển trang và kiểm tra tên nhóm hàng trong kết quả.
+- [ ] Đăng nhập warehouse01/123456: có quyền hàng hóa, không có quyền quản trị tài khoản.
 
 ## Chuyển buổi
 
 ```powershell
 git fetch origin
-git switch buoi4
+git switch buoi5
 ```
 
 Dừng API và WinForms trước khi chuyển nhánh, rồi build/chạy lại theo README của nhánh mới.

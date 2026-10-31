@@ -1,6 +1,6 @@
 namespace MiniSupermarket.WinForms;
 
-// Khung quản trị của buổi 3; các màn hình chỉ được thêm khi đã có API tương ứng.
+// Khung quản trị của buổi 4; các màn hình chỉ được thêm khi đã có API tương ứng.
 public class FormMainShell : Form
 {
     private readonly FlowLayoutPanel menu = new() { Dock = DockStyle.Left, Width = 195, FlowDirection = FlowDirection.TopDown, WrapContents = false, AutoScroll = true };
@@ -8,7 +8,7 @@ public class FormMainShell : Form
     private Form? active;
     public FormMainShell()
     {
-        Text = "MiniSuperMarket — Buổi 3";
+        Text = "MiniSuperMarket — Buổi 4";
         WindowState = FormWindowState.Maximized;
         MinimumSize = new Size(1100, 700);
         Controls.Add(content);
@@ -18,6 +18,16 @@ public class FormMainShell : Form
         bool warehouse = SessionManager.CurrentRole.Equals("Warehouse", StringComparison.OrdinalIgnoreCase);
         AddPage("Nhóm hàng", () => new FormCategoryManagement());
         if (admin) AddPage("Khách hàng", () => new FormCustomerManagement());
+        if (admin || warehouse)
+        {
+            AddPage("Sản phẩm", () => new FormProductManagement());
+            AddPage("Thương hiệu", () => new FormBrandManagement());
+        }
+        if (admin)
+        {
+            AddPage("Tài khoản", () => new FormUserManagement());
+            AddPage("Vai trò", () => new FormRoleManagement());
+        }
         var logout = new Button { Text = "Đăng xuất", Width = 180, Height = 42 };
         logout.Click += (_, _) => { SessionManager.Logout(); Close(); };
         menu.Controls.Add(logout);
