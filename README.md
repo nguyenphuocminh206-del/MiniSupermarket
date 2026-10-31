@@ -1,6 +1,6 @@
-# MiniSuperMarket — Buổi 4
+# MiniSuperMarket — Buổi 5
 
-**Giao diện quản trị và quản lý hàng hóa**
+**POS, đơn hàng, báo cáo và tích hợp hoàn chỉnh**
 
 Đây là một trong 5 mốc học tập được tách lại từ project hiện có. Lịch sử các nhánh là lộ trình học được dựng lại, không phải lịch sử thực hiện bài tập ban đầu.
 
@@ -14,19 +14,19 @@
 | `buoi4` | Shell quản trị, sản phẩm/phân trang, thương hiệu, tài khoản, vai trò | Kế thừa buoi3 |
 | `buoi5` | POS, thanh toán, đơn hàng, hoàn kho, dashboard, báo cáo, xuất hóa đơn | Project đầy đủ |
 
-## Nội dung buổi 4
+## Nội dung buổi 5
 
-- Bổ sung shell với menu theo vai trò và nhúng các form quản lý.
-- Quản lý sản phẩm, thương hiệu, tài khoản và vai trò bằng API và WinForms.
-- Thực hành DTO, AsNoTracking, Eager Loading, tìm kiếm và phân trang phía server.
-- Admin có toàn bộ chức năng quản trị; Warehouse xem nhóm hàng và quản lý hàng hóa; Cashier chỉ xem nhóm hàng trong mốc này.
+- Tích hợp đầy đủ project hiện tại: POS, mã vạch, giỏ hàng và thanh toán.
+- Quản lý đơn, trừ/hoàn tồn kho, điểm thưởng và transaction.
+- Dashboard, báo cáo doanh thu, stored procedure, xuất hóa đơn Excel và CSV.
+- Giao diện cuối cùng phân quyền Admin / Warehouse / Cashier; tài liệu gốc ở docs/PROJECT-GOC.md.
 
 ## Chạy project
 
 Yêu cầu Windows, .NET 8 SDK hoặc SDK mới hơn hỗ trợ net8.0; cài .NET 8 Desktop Runtime để chạy WinForms. Có thể mở `MiniSuperMarket.sln` bằng Visual Studio hỗ trợ .NET 8.
 
 ```powershell
-git clone --branch buoi4 https://github.com/nguyenphuocminh206-del/MiniSupermarket.git
+git clone --branch buoi5 https://github.com/nguyenphuocminh206-del/MiniSupermarket.git
 cd MiniSupermarket
 dotnet restore MiniSuperMarket.sln
 dotnet build MiniSuperMarket.sln --configuration Release
@@ -64,15 +64,16 @@ Các tài khoản và khóa JWT có sẵn chỉ phục vụ học tập trên m�
 
 ## Tự kiểm tra
 
-- [ ] Đăng nhập admin01/123456, mở các màn hình sản phẩm/thương hiệu/tài khoản/vai trò.
-- [ ] Tìm sản phẩm, chuyển trang và kiểm tra tên nhóm hàng trong kết quả.
-- [ ] Đăng nhập warehouse01/123456: có quyền hàng hóa, không có quyền quản trị tài khoản.
+- [ ] Đăng nhập cashier01/123456, nhập mã vạch 1000000001 và thanh toán.
+- [ ] Kiểm tra tồn kho, đơn hàng và điểm thưởng sau thanh toán; thử hủy bằng Admin.
+- [ ] Mở dashboard/báo cáo, kiểm tra thống kê và thử xuất hóa đơn.
+- [ ] Kiểm tra các vai trò Admin, Warehouse, Cashier trên giao diện và API.
 
 ## Chuyển buổi
 
 ```powershell
 git fetch origin
-git switch buoi5
+git switch buoi1
 ```
 
 Dừng API và WinForms trước khi chuyển nhánh, rồi build/chạy lại theo README của nhánh mới.
