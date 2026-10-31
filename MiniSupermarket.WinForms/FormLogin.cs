@@ -1,4 +1,4 @@
-using System.Net.Http.Json;
+﻿using System.Net.Http.Json;
 using System.Text.Json;
 
 namespace MiniSupermarket.WinForms
@@ -75,7 +75,7 @@ namespace MiniSupermarket.WinForms
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
 
-                FormCategoryManagement frmMain = new FormCategoryManagement();
+                FormMainShell frmMain = new FormMainShell();
 
                 this.Hide();
 

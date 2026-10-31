@@ -1,8 +1,8 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-
+using MiniSupermarket.API.Data;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,7 +39,10 @@ builder.Services.AddCors(options => options.AddPolicy("DevelopmentClient", polic
 // ========================================
 // Đăng ký DbContext sử dụng SQL Server
 // ========================================
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
+builder.Services.AddDbContext<SupermarketDbContext>(options =>
+    options.UseSqlServer(connectionString));
 
 // ========================================
 // Controllers + Swagger
