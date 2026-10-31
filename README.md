@@ -1,60 +1,64 @@
-﻿# 🛒 HỆ THỐNG QUẢN LÝ SIÊU THỊ MINI (MINISUPERMARKET SYSTEM)
-> **Môn học:** Lập trình Ứng dụng .NET Core (Mã môn: 229162)  
-> **Buổi thực hành:** Buổi 1 - Xây dựng Web API quản lý danh mục và kết nối WinForms Client (CRUD)
+# MiniSuperMarket — Buổi 1
 
----
+**Web API và WinForms CRUD nhóm hàng**
 
-## 🏗️ 1. Mô hình Kiến trúc Hệ thống (Client - Server)
-Dự án được xây dựng theo mô hình phân tầng hiện đại, tách biệt hoàn toàn giữa Backend và Frontend:
-* **`MiniSupermarket.API` (Backend):** Dự án ASP.NET Core Web API chịu trách nhiệm xử lý logic nghiệp vụ, quản lý dữ liệu và cung cấp các RESTful API chuẩn hóa.
-* **`MiniSupermarket.WinForms` (Frontend Client):** Ứng dụng Windows Forms đóng vai trò là máy trạm POS tại quầy, sử dụng `HttpClient` để gọi dữ liệu từ API qua mạng và hiển thị trực quan lên `DataGridView`.
+Đây là một trong 5 mốc học tập được tách lại từ project hiện có. Lịch sử các nhánh là lộ trình học được dựng lại, không phải lịch sử thực hiện bài tập ban đầu.
 
----
+## Lộ trình 5 buổi
 
-## 🛠️ 2. Công nghệ Sử dụng
-* **Ngôn ngữ:** C# (.NET 8.0)
-* **Backend:** ASP.NET Core Web API, Controllers, In-Memory Data, LINQ
-* **Frontend:** Windows Forms (.NET 8.0), `System.Net.Http.Json`
-* **Công cụ kiểm thử:** Swagger UI
+| Nhánh | Nội dung | Mốc |
+|---|---|---|
+| `buoi1` | Web API CRUD nhóm hàng, tìm kiếm, WinForms gọi HttpClient | Dữ liệu trong bộ nhớ |
+| `buoi2` | JWT, đăng nhập Admin/Cashier, bảo vệ API và nút thao tác | Kế thừa buoi1 |
+| `buoi3` | SQL Server, EF Core, migration, seed, quản lý khách hàng | Kế thừa buoi2 |
+| `buoi4` | Shell quản trị, sản phẩm/phân trang, thương hiệu, tài khoản, vai trò | Kế thừa buoi3 |
+| `buoi5` | POS, thanh toán, đơn hàng, hoàn kho, dashboard, báo cáo, xuất hóa đơn | Project đầy đủ |
 
----
+## Nội dung buổi 1
 
-## 📂 3. Cấu trúc Solution
-```text
-MiniSupermarketSystem/
-│
-├── MiniSupermarket.API/          # Dự án Web API (Backend)
-│   ├── Controllers/              # Chứa CategoriesController (CRUD & Search)
-│   ├── Models/                   # Chứa lớp thực thể Category.cs
-│   └── Program.cs                # Cấu hình dịch vụ và Middleware
-│
-└── MiniSupermarket.WinForms/     # Dự án Windows Forms (Frontend Client)
-    └── FormCategoryManagement.cs # Giao diện quản lý danh mục CRUD
+- Thiết kế Category; GET danh sách/chi tiết, POST, PUT, DELETE và tìm kiếm nhóm hàng.
+- Kết nối WinForms với Web API qua HttpClient, hiển thị DataGridView và cập nhật dữ liệu.
+- Dữ liệu nằm trong bộ nhớ; khởi động lại API sẽ trở về dữ liệu mẫu. Chưa cần SQL Server.
 
+## Chạy project
 
-🚀 4. Hướng dẫn Chạy và Kiểm thử Dự án
-Bước 1: Chạy phía Backend (Web API)
-Mở Solution bằng Visual Studio 2022.
+Yêu cầu Windows, .NET 8 SDK hoặc SDK mới hơn hỗ trợ net8.0; cài .NET 8 Desktop Runtime để chạy WinForms. Có thể mở `MiniSuperMarket.sln` bằng Visual Studio hỗ trợ .NET 8.
 
+```powershell
+git clone --branch buoi1 https://github.com/nguyenphuocminh206-del/MiniSupermarket.git
+cd MiniSupermarket
+dotnet restore MiniSuperMarket.sln
+dotnet build MiniSuperMarket.sln --configuration Release
+```
 
-Nhấp chuột phải vào project MiniSupermarket.API chọn Set as Startup Project.
+Chạy API trong terminal thứ nhất:
 
+```powershell
+dotnet dev-certs https --trust
+dotnet run --project MiniSupermarket.API --launch-profile https
+```
 
-Nhấn F5 để chạy. Trình duyệt sẽ tự động mở giao diện Swagger UI để kiểm tra các phương thức GET, POST, PUT, DELETE.
+Mở Swagger tại https://localhost:7158/swagger. Client sử dụng https://localhost:7158/api/.
 
+Chạy WinForms trong terminal thứ hai:
 
-Bước 2: Chạy phía Frontend (WinForms Client)
-Đảm bảo cổng (Port) trong ApiClientService hoặc HttpClient của WinForms khớp với cổng https://localhost:XXXXX của Web API đang chạy.
+```powershell
+dotnet run --project MiniSupermarket.WinForms
+```
 
-Nhấp chuột phải vào project MiniSupermarket.WinForms chọn Debug -> Start new instance.
+Buổi 1 mở thẳng form nhóm hàng, chưa cần đăng nhập.
 
-Thử nghiệm các chức năng: Tải danh sách, Thêm mới, Sửa, Xóa và Tìm kiếm nhóm hàng.
+## Tự kiểm tra
 
-👨‍💻 5. Tác giả
-Họ tên sinh viên:nguyễn phước minh
+- [ ] GET /api/categories trả danh sách mà không cần token.
+- [ ] Thêm một nhóm hàng, tìm theo tên, sửa rồi xóa trên WinForms.
+- [ ] Khởi động lại API và quan sát dữ liệu in-memory được khởi tạo lại.
 
+## Chuyển buổi
 
-Mã sinh viên: 2124110104
+```powershell
+git fetch origin
+git switch buoi2
+```
 
-
-Lớp học phần: CCQ2411C
+Dừng API và WinForms trước khi chuyển nhánh, rồi build/chạy lại theo README của nhánh mới.

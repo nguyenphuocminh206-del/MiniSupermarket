@@ -1,4 +1,3 @@
-﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MiniSupermarket.API.Models;
@@ -7,7 +6,6 @@ namespace MiniSupermarket.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class CategoriesController : ControllerBase
     {
         private static readonly List<Category> _categories = new()
@@ -51,7 +49,6 @@ namespace MiniSupermarket.API.Controllers
         }
 
         [HttpPost]
-        [Authorize (Roles = "Admin")]
         public IActionResult Create([FromBody] Category newCat)
         {
             if (string.IsNullOrWhiteSpace(newCat.CategoryName))
@@ -65,7 +62,6 @@ namespace MiniSupermarket.API.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize(Roles = "Admin")]
 
         public IActionResult Update(int id, [FromBody] Category updateCat)
         {
@@ -82,7 +78,6 @@ namespace MiniSupermarket.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
 
         public IActionResult Delete(int id)
         {

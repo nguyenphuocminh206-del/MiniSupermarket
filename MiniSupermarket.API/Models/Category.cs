@@ -1,4 +1,4 @@
-﻿namespace MiniSupermarket.API.Models
+namespace MiniSupermarket.API.Models
 {
     public class Category
     {
