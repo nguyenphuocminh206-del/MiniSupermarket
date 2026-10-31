@@ -215,12 +215,18 @@ namespace MiniSupermarket.WinForms
             }
         }
 
+        // Dùng cùng số tiền sau đổi điểm cho hiển thị, tiền thừa và kiểm tra thanh toán.
+        private decimal GetPayableTotal()
+        {
+            return Math.Max(0m, _cart.Sum(x => x.TotalPrice) - nudRedeemPoints.Value * 1000m);
+        }
+
         private void UpdateCartDisplay()
         {
             dgvCart.DataSource = null;
             dgvCart.DataSource = _cart;
 
-            decimal total = Math.Max(0m, _cart.Sum(x => x.TotalPrice) - nudRedeemPoints.Value * 1000m);
+            decimal total = GetPayableTotal();
 
             lblTotalAmount.Text = $"{total:N0} đ";
 
@@ -243,7 +249,7 @@ namespace MiniSupermarket.WinForms
 
         private void CalculateChange()
         {
-            decimal total = Math.Max(0m, _cart.Sum(x => x.TotalPrice) - nudRedeemPoints.Value * 1000m);
+            decimal total = GetPayableTotal();
 
             if (TryGetCash(out decimal cashReceived))
             {
@@ -293,7 +299,25 @@ namespace MiniSupermarket.WinForms
                 return;
             }
 
-            decimal total = _cart.Sum(x => x.TotalPrice);
+            if (nudRedeemPoints.Value > 0 && string.IsNullOrWhiteSpace(txtCustomerPhone.Text))
+            {
+                MessageBox.Show(
+                    "Vui lòng nhập số điện thoại khách hàng để sử dụng điểm thưởng!",
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtCustomerPhone.Focus();
+                return;
+            }
+
+            if (nudRedeemPoints.Value * 1000m > _cart.Sum(x => x.TotalPrice))
+            {
+                MessageBox.Show(
+                    "Số điểm đổi vượt quá giá trị hóa đơn!",
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                nudRedeemPoints.Focus();
+                return;
+            }
+
+            decimal total = GetPayableTotal();
 
             if (cashReceived < total)
             {
