@@ -1,6 +1,6 @@
-# MiniSuperMarket — Buổi 1
+# MiniSuperMarket — Buổi 2
 
-**Web API và WinForms CRUD nhóm hàng**
+**Đăng nhập JWT và phân quyền**
 
 Đây là một trong 5 mốc học tập được tách lại từ project hiện có. Lịch sử các nhánh là lộ trình học được dựng lại, không phải lịch sử thực hiện bài tập ban đầu.
 
@@ -14,18 +14,18 @@
 | `buoi4` | Shell quản trị, sản phẩm/phân trang, thương hiệu, tài khoản, vai trò | Kế thừa buoi3 |
 | `buoi5` | POS, thanh toán, đơn hàng, hoàn kho, dashboard, báo cáo, xuất hóa đơn | Project đầy đủ |
 
-## Nội dung buổi 1
+## Nội dung buổi 2
 
-- Thiết kế Category; GET danh sách/chi tiết, POST, PUT, DELETE và tìm kiếm nhóm hàng.
-- Kết nối WinForms với Web API qua HttpClient, hiển thị DataGridView và cập nhật dữ liệu.
-- Dữ liệu nằm trong bộ nhớ; khởi động lại API sẽ trở về dữ liệu mẫu. Chưa cần SQL Server.
+- Bổ sung API đăng nhập và phát hành JWT chứa thông tin vai trò.
+- Admin được thêm/sửa/xóa; Cashier được xem và tìm kiếm nhóm hàng.
+- FormLogin lưu token; HttpClient gửi Bearer token và giao diện khóa nút theo quyền.
 
 ## Chạy project
 
 Yêu cầu Windows, .NET 8 SDK hoặc SDK mới hơn hỗ trợ net8.0; cài .NET 8 Desktop Runtime để chạy WinForms. Có thể mở `MiniSuperMarket.sln` bằng Visual Studio hỗ trợ .NET 8.
 
 ```powershell
-git clone --branch buoi1 https://github.com/nguyenphuocminh206-del/MiniSupermarket.git
+git clone --branch buoi2 https://github.com/nguyenphuocminh206-del/MiniSupermarket.git
 cd MiniSupermarket
 dotnet restore MiniSuperMarket.sln
 dotnet build MiniSuperMarket.sln --configuration Release
@@ -46,19 +46,21 @@ Chạy WinForms trong terminal thứ hai:
 dotnet run --project MiniSupermarket.WinForms
 ```
 
-Buổi 1 mở thẳng form nhóm hàng, chưa cần đăng nhập.
+Tài khoản thực hành: `admin` / `123456` hoặc `cashier` / `123456`.
+
+Các tài khoản và khóa JWT có sẵn chỉ phục vụ học tập trên máy cá nhân.
 
 ## Tự kiểm tra
 
-- [ ] GET /api/categories trả danh sách mà không cần token.
-- [ ] Thêm một nhóm hàng, tìm theo tên, sửa rồi xóa trên WinForms.
-- [ ] Khởi động lại API và quan sát dữ liệu in-memory được khởi tạo lại.
+- [ ] Gọi GET /api/categories khi chưa đăng nhập: nhận 401.
+- [ ] Đăng nhập admin/123456 và thử CRUD thành công.
+- [ ] Đăng nhập cashier/123456: xem được danh sách, gọi POST bằng token Cashier nhận 403.
 
 ## Chuyển buổi
 
 ```powershell
 git fetch origin
-git switch buoi2
+git switch buoi3
 ```
 
 Dừng API và WinForms trước khi chuyển nhánh, rồi build/chạy lại theo README của nhánh mới.

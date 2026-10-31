@@ -1,4 +1,4 @@
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Windows.Forms;
 
@@ -25,6 +25,13 @@ namespace MiniSupermarket.WinForms
         // Sự kiện Form vừa bật lên: Tự động tải dữ liệu từ API lên bảng
         private async void FormCategoryManagement_Shown(object? sender, EventArgs e)
         {
+            // Kiểm tra phân quyền khóa nút ngay khi hiển thị form
+            if (SessionManager.CurrentRole != "Admin")
+            {
+                btnAdd.Enabled = false;
+                btnUpdate.Enabled = false;
+                btnDelete.Enabled = false;
+            }
 
             await LoadDataAsync();
         }
